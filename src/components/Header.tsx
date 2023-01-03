@@ -1,9 +1,11 @@
-import styles from './Header.module.css'
+import styles from "./Header.module.css";
+
+import logo from '../assets/feed-logo.svg'
 
 export function Header() {
   return (
-    <strong className={styles.header}>
-      Feed
-    </strong>
-  )
+    <header className={styles.header}>
+      <img src={logo} alt="Feed logo" />
+    </header>
+  );
 }

@@ -15,14 +15,15 @@ export interface PostProps {
   };
   publishedAt: Date;
   content: Array<{
-    type: (string & "paragraph") | "link";
+    type: string & "paragraph" | "link";
     content: string;
   }>;
 }
 
 export function Post({ author, content, id, publishedAt }: PostProps) {
-  const [comments, setComments]= useState([1,2]);
-  
+  const [comments, setComments]= useState(['bom post']);
+  const [newCommentText, setNewCommentText] = useState('');
+
   const publishedDate = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", {
     locale: ptBR,
   });
@@ -33,8 +34,13 @@ export function Post({ author, content, id, publishedAt }: PostProps) {
 
   function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
-    setComments([...comments, comments.length + 1])
-    console.log('Ola')
+    setComments([...comments, newCommentText])
+    setNewCommentText('');
+  }
+
+  function handleNewCommentChange(event: FormEvent) {
+    const commentValue = event.target as HTMLTextAreaElement;
+    setNewCommentText(commentValue.value)
   }
 
   return (
@@ -74,7 +80,7 @@ export function Post({ author, content, id, publishedAt }: PostProps) {
           <strong>Deixe seu feedback!</strong>
 
           
-          <textarea placeholder="Deixe seu comentário" />
+          <textarea name="comment" placeholder="Deixe seu comentário" value={newCommentText} onChange={handleNewCommentChange} />
 
           <footer>
             <button type="submit">Publicar</button>
@@ -83,7 +89,7 @@ export function Post({ author, content, id, publishedAt }: PostProps) {
 
         <div className={styles.commentList}>
           { comments.map(comment => {
-            return <Comment />
+            return <Comment content={comment} />
           }) }
         </div>
       </article>

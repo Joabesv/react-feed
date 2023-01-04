@@ -20,14 +20,9 @@ const posts: PostProps[] = [
           "Need a job, share my linkedin if you can, would help a lot :)",
       },
       {
-        type: "paragraph",
-        content:
-          "Need a job, share my linkedin if you can, would help a lot :)",
-      },
-      {
         type: "link",
         content:
-          '👉 <a href="https://www.linkedin.com/in/Joabesv">Joabe Silva</a>',
+          '👉 Joabe Silva',
       },
     ],
     publishedAt: new Date(),
